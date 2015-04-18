@@ -19,7 +19,7 @@ var arr = [40,50,60];
 
   //Code Here
 var last = function(arr) {
-    return arr[2];
+    return arr[arr.length - 1];
 }
 
 //Next Problem
@@ -29,13 +29,13 @@ var family = ['Tyler', 'Jordyn', 'Ryan', 'Chelsey', 'Ireland'];
 //Create a function named 'looper' that is given family as it's only argument, loops through the given array, and alerts every item in the array.
 
   //Code Here
-var arrayLength = family.length;
-var looper = function(family) {
-    for (i = 0; i < arrayLength; i++)    {
+
+var looper = function(arr) {
+    for (i = 0; i < arr.length; i++)    {
         alert(family[i]);
     }
 }
- looper(family)
+looper(family)
 
 
 //Next problem
@@ -47,13 +47,16 @@ var letters = ['A', 'B', 'C', 'D', 'E'];
 
   //Code Here
 
-var reversedLooper = function(array)  {  // NEVER ENDING LOOP. GET HELP.
-  for(i = 0; i < array.length; i++)  {
-    alert(array.reverse());
-
+var reversedLooper = function(arr) {
+  var reversedArr = arr.reverse();
+  for(i = 0; i < reversedArr.length; i++) {
+    alert(reversedArr[i]);
   }
 }
-reversedLooper(letters)
+
+reversedLooper(letters);
+
+
 //Next Problem
 
 
@@ -62,14 +65,18 @@ var nums = [1,2,3,6,22,98,45,23,22,12];
 
   //Code Here
 
-var numsLength = nums.length;
-var evenFinder = function(nums) {
-  for(i = 0; i < nums.length; i++)  {
-    if (nums[i] % 2 !== 0) {
-      nums.splice();
+var evenFinder = function(arr) {
+  for(i = arr.length - 1; i >= 0; i--)  {
+    if (arr[i] % 2) {
+      arr.splice([i], 1);
     }
   }
+  alert(arr);
 }
+
+evenFinder(nums)
+
+
 
 //Next problem
 
@@ -79,18 +86,20 @@ var evens = [];
 var odds = [];
 //Write a function called divider that is given three arguments, nums, evens, and odds.
 //Have divider return an Array with the first item in the array being the evens array (all the even values from nums) and the second item in the Array being the odds array(all the odd values from nums).
-var numsLength = nums.length;
-var divider = function(nums, evens, odds) {
-  for(i = 0; i < numsLength; i++) {
-    if (nums[i] % 2 !== 0)  {
-      nums.splice()
+var divider = function(arr, evens, odds) { 
+  for(i = 0; i < arr.length; i++) {
+    if(arr[i] % 2 == 0) {
+      evens.push(arr[i])
+    } else {
+      odds.push(arr[i])
     }
-    else  {
-      num.splice()
-    }
-  return evens odds;
   }
+  return [evens, odds];
 }
+console.log(divider(nums, evens, odds));
+
+
+
 
 
   //Code Here
@@ -106,16 +115,14 @@ var numbers = [0,3,4,5,6,7,9,14,17,24,25,26,29,30];
 //Above you're given a function that will return a random number between 0 and 30, and an array full or numbers. Your job is to write a function named finder that will get a random number, then loop through the array to see if that random number is in the array. If it is, return true, if it's not, return false
 
   //Code Here
-numbersLength = numbers.length;
-var finder = function(inputArray) {
-  for (i = 0; i < numbersLength; i++) {
-    if (numbers.indexOf(Math.floor(Math.random() * 30)) >= 0)  {
+var finder = function(arr) {
+  var randomNum = getRandomArbitrary();
+  for (i = 0; i < arr.length; i++) {
+    if (arr[i] === randomNum)  {
       return true;
     }
-    else  {
-      return false;
-    }
   }
+  return false;
 }
 
 
@@ -147,19 +154,23 @@ var myGroceryList = ['chips', 'pizza', 'hotpockets', 'MtnDew', 'corndogs'];
   and the second is an item to add to your grocery list. In addItem add the item you passed in to
   myGroceryList then return the new, updated grocery list.
 */
-var length = myGroceryList.length;
-var removeItem = function(myGroceryList, x) {
-  for(i = 0; i < length; i++) {
-    if(x === 'chips' || 'pizza' || 'hotpockets' || 'MtnDew' || 'corndogs')  {
-      myGroceryList.pop();
-      return myGroceryList;
+
+var removeItem = function(arr, str) {
+  for(i = arr.length - 1; i >= 0; i--) {
+    if(arr[i] === str) {
+      arr.splice(i, 1);
     }
   }
+  return arr;
 }
 
-var addItem = function(myGroceryList, y) {
-  myGroceryList.push(y);
-} //Code Here
+var addItem = function(arr, y) {
+  arr.push(y);
+  return arr;
+} 
+
+
+addItem(myGroceryList, 'lemonade') //Code Here
 
 //removeItem('chips') --> ['pizza', 'hotpockets', 'MtnDew', 'corndogs'];
 //addItem('Jerky') --> ['pizza', 'hotpockets', 'MtnDew', 'corndogs', 'Jerky'];
@@ -173,7 +184,14 @@ var addItem = function(myGroceryList, y) {
 //Write a function called maker that creates an array, fills that array with numbers from 1 to 215, then returns the array.
 
   //Code Here
-var maker = function();
+var maker = function()  {
+  var arr = [];
+  for (var i = 1; i <= 215; i++)  {
+    arr.push(i);
+
+  }
+  return arr;
+}
 
 
 //Next Problem
@@ -184,12 +202,11 @@ var numbers = [5, '9', 16, 19, '25', '34', 48];
 //array after adding ten to each item in numbers. *Verify your answer is correct. --> [15, 19, 26, 29, 35, 44, 58]
 
   //Code Here
-numbersLength = numbers.length;
-var addTen = function(numbers)  {
-  for(i = 0; i < numbersLength; i++)  {
-    return numbers[i];
-    numbers[i].add(10);
+var addTen = function(arr)  {
+  for(i = 0; i < arr.length; i++)  {
+    arr[i] = parseInt(arr[i]) + 10;
   }
+  return arr;
 }
 
 
@@ -210,7 +227,15 @@ for(var i = 0; i < num2; i++){
 //Above is some code that adds a random number to both arr1 and arr2.
 //Write a function that is given arr1 and arr2 is it's only arguments. Return the array which is longest.
 
-  //Code Here
+ var longest = function(array1, array2) {
+    if (array1.length > array2.length)  {
+        return array1;
+    } else if(array1.length < array2.length)  {
+        return array2;
+    } else  {
+        return null;
+    }
+ } //Code Here
 
 
 /*As a continuation of the previous problem, write another function called 'both'.
@@ -218,4 +243,16 @@ for(var i = 0; i < num2; i++){
   'both' should return a new array full of numbers that are found in both arr1 and arr2.
 */
 
+  //var longest = function(){...};
+  var both = function(array1, array2) {
+    var duplicates = [];
+    for (i = 0; i < array1.length; i++) {
+      for (j = i; j < array2.length; i++) {
+        if (array1[i] === array2[j])  {
+          duplicates.push(array1[i]);
+        }
+      }
+    }
+    return duplicates;
+}
   //Code Here
